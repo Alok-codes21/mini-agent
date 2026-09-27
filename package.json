@@ -1,0 +1,16 @@
+{
+  "name": "mini-agent",
+  "version": "1.0.0",
+  "description": "Apna personal AI agent - Telegram bot + Groq brain + Playwright browser tasks",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "playwright": "^1.47.0"
+  }
+}
