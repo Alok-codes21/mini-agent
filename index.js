@@ -66,7 +66,7 @@ Bas normal message kar - main AI se baat karunga.
 Commands:
 /help - yeh list
 /tasks - saare tasks dikha
-/task <naam> <input> - koi task chala (jaise: /task search india news aaj)
+/task <naam> <input> - koi task chala (jaise: /task cab from ghaziabad to noida)
 /cancel - pending confirm cancel
 
 Naya task add karna hai? tasks/ folder mein file banao, README mein likha hai kaise.`;
@@ -140,6 +140,13 @@ async function handleMessage(msg) {
         const result = await runTask('yt', q);
         return send(chatId, result);
       }
+    }
+
+    // Natural language shortcut: cab/auto fare wale sawaal -> live Rapido fares
+    if (/\b(cab|taxi|ola|uber|rapido|kiraya|fare|auto)\b/i.test(text)) {
+      await send(chatId, '⏳ Live fares check kar raha hu (Rapido)...');
+      const result = await runTask('cab', text);
+      return send(chatId, result);
     }
 
     // Natural language shortcut: live-info wale sawaal (news, price, score...) -> search task
