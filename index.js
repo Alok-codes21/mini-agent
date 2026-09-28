@@ -180,7 +180,7 @@ async function startWebhook() {
   });
   server.listen(PORT, async () => {
     try {
-      await tg('setWebhook', { url: `${WEBHOOK_URL}${hookPath}`, drop_pending_updates: true });
+      await tg('setWebhook', { url: `${WEBHOOK_URL}${hookPath}`, drop_pending_updates: false });
       console.log(`🤖 Agent webhook mode mein start: ${WEBHOOK_URL}${hookPath}`);
     } catch (err) {
       console.error('setWebhook fail (server phir bhi chal raha):', err.message);
