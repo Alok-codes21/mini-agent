@@ -7,11 +7,13 @@
 import readSite from './read-site.js';
 import yt from './yt.js';
 import search from './search.js';
+import cab from './cab.js';
 
 export const tasks = {
   readsite: readSite,
   yt: yt,
   search: search,
+  cab: cab,
   // apne naye tasks yahan add kar
 };
 
