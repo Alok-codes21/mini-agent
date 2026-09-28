@@ -6,10 +6,12 @@
 
 import readSite from './read-site.js';
 import yt from './yt.js';
+import search from './search.js';
 
 export const tasks = {
   readsite: readSite,
   yt: yt,
+  search: search,
   // apne naye tasks yahan add kar
 };
 
