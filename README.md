@@ -6,6 +6,7 @@ Telegram pe baat karta hai, AI se jawab deta hai (Groq, free), aur browser mein 
 
 - 💬 Telegram pe normal baat-cheet (AI brain: Groq, backup: Gemini)
 - 🌐 Browser tasks - jaise koi website khol ke padhna (`/task readsite <url>`)
+- 🔎 Web search - live info (news, prices, scores) - `/task search <sawaal>` ya seedha pooch lo
 - 🔐 Login wali sites - ek baar khud login kar, session save ho jata hai
 - ✅ Risky kaam se pehle tujhse confirm maangta hai
 - 🔒 Sirf TERA Telegram ID allowed hai - koi aur use nahi kar sakta
@@ -26,6 +27,7 @@ Telegram pe baat karta hai, AI se jawab deta hai (Groq, free), aur browser mein 
 1. https://console.groq.com/keys pe jao (Google se sign in)
 2. "Create API Key" - copy kar lo
 3. (Optional backup) Gemini key: https://aistudio.google.com/apikey
+4. (Optional) Tavily key web search ke liye: https://app.tavily.com (free, 1000 searches/mahina). Nahi doge toh DuckDuckGo fallback chalega.
 
 ### Step 4: Project chalao
 ```bash
@@ -54,6 +56,8 @@ Telegram pe apne bot ko message karo - jawab aana chahiye! 🎉
 | `/task readsite https://example.com` | website khol ke padhega |
 | `/task yt lofi hip hop` | YouTube top 5 videos |
 | `youtube pe lofi dhundh` | bina command ke bhi YouTube search |
+| `/task search india news aaj` | internet pe live search + AI jawab |
+| `india ka latest score kya hai` | bina command ke bhi search (news/price/score/latest wale sawaal) |
 
 ## Login wali sites ke liye
 
