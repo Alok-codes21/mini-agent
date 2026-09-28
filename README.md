@@ -7,6 +7,7 @@ Telegram pe baat karta hai, AI se jawab deta hai (Groq, free), aur browser mein 
 - 💬 Telegram pe normal baat-cheet (AI brain: Groq, backup: Gemini)
 - 🌐 Browser tasks - jaise koi website khol ke padhna (`/task readsite <url>`)
 - 🔎 Web search - live info (news, prices, scores) - `/task search <sawaal>` ya seedha pooch lo
+- 🚕 Live cab fares - do jagah ke beech Rapido ki real prices - `cab from X to Y` likho bas
 - 🔐 Login wali sites - ek baar khud login kar, session save ho jata hai
 - ✅ Risky kaam se pehle tujhse confirm maangta hai
 - 🔒 Sirf TERA Telegram ID allowed hai - koi aur use nahi kar sakta
@@ -58,6 +59,7 @@ Telegram pe apne bot ko message karo - jawab aana chahiye! 🎉
 | `youtube pe lofi dhundh` | bina command ke bhi YouTube search |
 | `/task search india news aaj` | internet pe live search + AI jawab |
 | `india ka latest score kya hai` | bina command ke bhi search (news/price/score/latest wale sawaal) |
+| `cab from ghaziabad to noida` | Rapido se LIVE cab/auto/bike fare ranges |
 
 ## Login wali sites ke liye
 
