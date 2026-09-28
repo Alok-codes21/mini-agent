@@ -40,10 +40,22 @@ async function tg(method, body) {
   return data.result;
 }
 
+// AI aksar **bold** likhta hai; Telegram ka legacy Markdown sirf *bold* samajhta hai
+function toTelegramMarkdown(text) {
+  return text.replace(/\*\*([^*]+)\*\*/g, '*$1*');
+}
+
 async function send(chatId, text) {
   // Telegram message limit 4096 chars hota hai
   for (let i = 0; i < text.length; i += 4000) {
-    await tg('sendMessage', { chat_id: chatId, text: text.slice(i, i + 4000) });
+    const chunk = toTelegramMarkdown(text.slice(i, i + 4000));
+    try {
+      await tg('sendMessage', { chat_id: chatId, text: chunk, parse_mode: 'Markdown' });
+    } catch (err) {
+      // Koi ajeeb character parse tod de toh plain text bhej do
+      console.error('Markdown send fail, plain bhej raha:', err.message);
+      await tg('sendMessage', { chat_id: chatId, text: text.slice(i, i + 4000) });
+    }
   }
 }
 
