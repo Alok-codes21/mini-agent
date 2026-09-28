@@ -54,7 +54,7 @@ Bas normal message kar - main AI se baat karunga.
 Commands:
 /help - yeh list
 /tasks - saare tasks dikha
-/task <naam> <input> - koi task chala (jaise: /task readsite https://example.com)
+/task <naam> <input> - koi task chala (jaise: /task search india news aaj)
 /cancel - pending confirm cancel
 
 Naya task add karna hai? tasks/ folder mein file banao, README mein likha hai kaise.`;
@@ -128,6 +128,13 @@ async function handleMessage(msg) {
         const result = await runTask('yt', q);
         return send(chatId, result);
       }
+    }
+
+    // Natural language shortcut: live-info wale sawaal (news, price, score...) -> search task
+    if (/\b(search|google|news|khabar|khabre|khabren|latest|score|prices?|rate|bhav)\b/i.test(text)) {
+      await send(chatId, '⏳ Internet pe dhundh raha hu...');
+      const result = await runTask('search', text);
+      return send(chatId, result);
     }
 
     // Normal baat-cheet: AI brain
