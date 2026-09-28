@@ -45,6 +45,15 @@ function toTelegramMarkdown(text) {
   return text.replace(/\*\*([^*]+)\*\*/g, '*$1*');
 }
 
+// Markdown parse fail ho toh user ko kachra (*, _, `) na dikhe - saaf plain text bhejo
+function stripMarkdown(text) {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/`{1,3}([^`]+)`{1,3}/g, '$1')
+    .replace(/[*_`]/g, '');
+}
+
 async function send(chatId, text) {
   // Telegram message limit 4096 chars hota hai
   for (let i = 0; i < text.length; i += 4000) {
@@ -54,7 +63,7 @@ async function send(chatId, text) {
     } catch (err) {
       // Koi ajeeb character parse tod de toh plain text bhej do
       console.error('Markdown send fail, plain bhej raha:', err.message);
-      await tg('sendMessage', { chat_id: chatId, text: text.slice(i, i + 4000) });
+      await tg('sendMessage', { chat_id: chatId, text: stripMarkdown(text.slice(i, i + 4000)) });
     }
   }
 }
