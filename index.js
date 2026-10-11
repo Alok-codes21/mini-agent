@@ -3,6 +3,7 @@
 
 import http from 'http';
 import { think } from './brain.js';
+import { latexToUnicode } from './latex.js';
 import { addMessage, getHistory } from './memory.js';
 import { tasks, runTask } from './tasks/index.js';
 
@@ -55,6 +56,7 @@ function stripMarkdown(text) {
 }
 
 async function send(chatId, text) {
+  text = latexToUnicode(text); // safety net: LaTeX ko Unicode mein badlo
   // Telegram message limit 4096 chars hota hai
   for (let i = 0; i < text.length; i += 4000) {
     const chunk = toTelegramMarkdown(text.slice(i, i + 4000));
