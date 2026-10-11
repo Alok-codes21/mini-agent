@@ -2,7 +2,7 @@
 // Telegram pe messages sunta hai, brain (AI) ko bhejta hai, tasks chalata hai.
 
 import http from 'http';
-import { think } from './brain.js';
+import { think, liveSearchQuery } from './brain.js';
 import { latexToUnicode } from './latex.js';
 import { addMessage, getHistory } from './memory.js';
 import { tasks, runTask } from './tasks/index.js';
@@ -72,7 +72,7 @@ async function send(chatId, text) {
 
 const HELP = `Yo! Main tera personal agent hu 🤖
 
-Bas normal message kar - main AI se baat karunga.
+Bas normal message kar - main AI se baat karunga. Agar sawaal ko live/fresh data chahiye (news, price, score, weather...), toh main khud internet pe search karke jawab dunga - 'search' likhne ki zarurat nahi.
 
 Commands:
 /help - yeh list
@@ -164,6 +164,16 @@ async function handleMessage(msg) {
     if (/\b(search|google|news|khabar|khabre|khabren|latest|score|prices?|rate|bhav)\b/i.test(text)) {
       await send(chatId, '⏳ Internet pe dhundh raha hu...');
       const result = await runTask('search', text);
+      return send(chatId, result);
+    }
+
+    // Auto live lookup: jis sawaal ko fresh internet data chahiye, bot khud search chalata hai
+    const liveQuery = await liveSearchQuery(text);
+    if (liveQuery) {
+      await send(chatId, '⏳ Live check kar raha hu...');
+      const result = await runTask('search', liveQuery);
+      addMessage('user', text);
+      addMessage('assistant', result);
       return send(chatId, result);
     }
 
